@@ -1,4 +1,5 @@
 Laser IO
     Show channel number on button on the colored area
         See https://github.com/tdaffin/LaserIO/blob/main/src/main/resources/assets/laserio/textures/gui/buttons/blankbutton.png
-    Show Car type color somewhere on the card GUI
+    Show card type color somewhere on the card GUI
+        Also show which side/slot of the node the card is on
