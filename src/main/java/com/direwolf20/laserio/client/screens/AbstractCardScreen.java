@@ -10,14 +10,17 @@ import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
+import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
+import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -35,7 +38,9 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
 
     private final ResourceLocation GUI = new ResourceLocation(LaserIO.MODID, "textures/gui/redstonecard.png");
 
-    private final int HeaderOffset = 20;
+    private final int HeaderOffset = 20 - 3;
+    private final int LaserWidth = 4;
+    private final int LaserInset = 5;
     private final int ColorInset = 5;
 
     protected final T baseContainer;
@@ -57,6 +62,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
     public abstract void openNode();
 
     public void addBackButton() {
+        //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
             return;
         buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
@@ -71,14 +77,65 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         if (MiscTools.inBounds(returnButton, mouseX, mouseY)) {
             this.renderTooltip(pPoseStack, new TranslatableComponent(LaserNode.SCREEN_LASERNODE), mouseX, mouseY);
         }
-     }
+    }
+
+    @Override
+    public void render(PoseStack matrixStack, int mouseX, int mouseY, float partialTicks) {
+        super.render(matrixStack, mouseX, mouseY, partialTicks);   
+    }
 
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
         Color color = RenderUtils.getColor(CardType);
-        RenderSystem.setShaderTexture(0, GUI);
+        Minecraft minecraft = Minecraft.getInstance();
+        Font font = minecraft.font;
+
+        Component text = this.cardTypeName();
+        int textWidth = font.width(text);
+
         int relX = (this.width - this.imageWidth) / 2;
         int relY = (this.height - this.imageHeight) / 2;
+        //int x = relX + 0;
+        //int y = relY + 4;
+        //int w = this.imageWidth;
+        //int h = 11;
+        //fill(matrixStack, x + 2, y + 2, x + w, y + h + 2, 0xFFC6C6C6);
+        //fill(matrixStack, x, y + h, x + 2, y + h + 1, 0xFFFFFFFF);
+        //fill(matrixStack, x + w, y + h, x + w + 2, y + h + 1, 0xFF868686);
+        int laserY = relY - HeaderOffset/2;
+        int hh = LaserWidth/2;
+        fill(matrixStack, relX + LaserInset, laserY - hh, relX + this.imageWidth - LaserInset, laserY + hh, color.getRGB());
+
+        int x = getGuiLeft();
+        int y = getGuiTop() - HeaderOffset;
+
+
+        
+        int width = textWidth + 8;//80;
+        int height = 20;
+
+        float alpha = 1.0F;
+        RenderSystem.setShader(GameRenderer::getPositionTexShader);
+        RenderSystem.setShaderTexture(0, AbstractWidget.WIDGETS_LOCATION);
+        RenderSystem.setShaderColor(1.0F, 1.0F, 1.0F, alpha);
+        int i = 1;
+        int vOffset = 46 + i * 20;
+        //RenderSystem.enableBlend();
+        //RenderSystem.defaultBlendFunc();
+        //RenderSystem.enableDepthTest();
+        this.blit(matrixStack, x, y, 0, vOffset, width / 2, height);
+        this.blit(matrixStack, x + width / 2, y, 200 - width / 2, vOffset, width / 2, height);
+        //this.renderBg(matrixStack, minecraft, pMouseX, pMouseY);
+        //int j = getFGColor();
+        int j = Color.WHITE.getRGB();
+        drawCenteredString(matrixStack, font, text, x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
+
+        //FormattedCharSequence chars = text.getVisualOrderText();
+        //float x = relX + this.imageWidth / 2f - font.width(text) / 2f;
+        //float y = relY - HeaderOffset + ColorInset + 4;
+        //font.drawShadow(matrixStack, text, x, y, Color.WHITE.getRGB());
+
+        /*RenderSystem.setShaderTexture(0, GUI);
         this.blit(matrixStack, relX, relY - HeaderOffset, 0, 0, this.imageWidth, this.imageHeight);
         fill(matrixStack, relX + ColorInset, relY - HeaderOffset + ColorInset,
             relX + this.imageWidth - ColorInset, relY, color.getRGB());
@@ -90,8 +147,10 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         FormattedCharSequence text = this.cardTypeName().getVisualOrderText();
         float x = (relX + this.imageWidth / 2f - font.width(text) / 2f) / scale;
         float y = (relY - HeaderOffset + ColorInset + 4) / scale;
-        font.drawShadow(matrixStack, text, x, y, Color.WHITE.getRGB());
-        matrixStack.popPose();
+        font.drawShadow(matrixStack, text, x, y, Color.LIGHT_GRAY.getRGB());
+        matrixStack.popPose();*/
+
+        
     }
     
 }
