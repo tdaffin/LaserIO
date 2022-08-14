@@ -19,14 +19,13 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
 import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 
 import java.awt.*;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +75,10 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         super.renderTooltip(pPoseStack, mouseX, mouseY);
         Button returnButton = buttons.get(ReturnButton);
         if (MiscTools.inBounds(returnButton, mouseX, mouseY)) {
-            this.renderTooltip(pPoseStack, new TranslatableComponent(LaserNode.SCREEN_LASERNODE), mouseX, mouseY);
+            ArrayList<Component> tooltips = new ArrayList<Component>();
+            tooltips.add(new TranslatableComponent(LaserNode.SCREEN_LASERNODE));
+            tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
+            this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
     }
 
