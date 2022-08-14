@@ -40,6 +40,24 @@ public class LaserNodeBERender extends BaseLaserBERender<LaserNodeBE> {
             new Color(176, 46, 38),
             new Color(29, 28, 33)
     };
+    /*{
+        new Color(0xf9ffff),    // White
+        new Color(0xf9801d),    // Orange
+        new Color(0xc64fbd),    // Magenta
+        new Color(0x3ab3da),    // Cyan
+        new Color(0xffd83d),    // Yellow -- Energy
+        new Color(0x80c71f),    // Green -- Item
+        new Color(0xf38caa),    // Pink
+        new Color(0x474f52),    // DarkGrey
+        new Color(0x9c9d97),    // LightGrey
+        new Color(0x169c9d),    // DarkCyan
+        new Color(0x8932b7),    // Purple
+        new Color(0x3c44a9),    // DarkBlue -- Fluid
+        new Color(0x825432),    // Brown
+        new Color(0x5d7c15),    // DarkGreen
+        new Color(0xb02e26),    // * Red
+        new Color(0x1d1c21),    // * Black
+    };*/
 
 
     public LaserNodeBERender(BlockEntityRendererProvider.Context context) {
