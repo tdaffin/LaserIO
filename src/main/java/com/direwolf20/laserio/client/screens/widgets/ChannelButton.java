@@ -1,5 +1,6 @@
 package com.direwolf20.laserio.client.screens.widgets;
 
+import com.direwolf20.laserio.client.blockentityrenders.LaserNodeBERender;
 import com.direwolf20.laserio.common.LaserIO;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
@@ -16,24 +17,7 @@ import java.awt.*;
 public class ChannelButton extends Button {
     private final ResourceLocation resourceLocation = new ResourceLocation(LaserIO.MODID, "textures/gui/buttons/blankbutton.png");
     private int channel;
-    private final Color colors[] = {
-            new Color(0xf9ffff),    // White
-            new Color(0xf9801d),    // Orange
-            new Color(0xc64fbd),    // Magenta
-            new Color(0x3ab3da),    // Cyan
-            new Color(0xffd83d),    // Yellow -- Energy
-            new Color(0x80c71f),    // Green -- Item
-            new Color(0xf38caa),    // Pink
-            new Color(0x474f52),    // DarkGrey
-            new Color(0x9c9d97),    // LightGrey
-            new Color(0x169c9d),    // DarkCyan
-            new Color(0x8932b7),    // Purple
-            new Color(0x3c44a9),    // DarkBlue -- Fluid
-            new Color(0x825432),    // Brown
-            new Color(0x5d7c15),    // DarkGreen
-            new Color(0xb02e26),    // Red - Redstone
-            new Color(0x1d1c21),    // Black
-    };
+    private final Color colors[] = LaserNodeBERender.colors;
     private final Color darkText = Color.BLACK;
     private final Color lightText = Color.WHITE;
     private final Color textColors[] = {
