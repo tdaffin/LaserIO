@@ -57,6 +57,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         CardType = baseCard != null ? baseCard.getCardType() : BaseCard.CardType.MISSING;
     }
 
+    // TODO: Use a map on CardType
     public abstract Component cardTypeName();
 
     public abstract void openNode();
