@@ -2,8 +2,10 @@ package com.direwolf20.laserio.client.screens;
 
 import com.direwolf20.laserio.client.renderer.RenderUtils;
 import com.direwolf20.laserio.common.LaserIO;
+import com.direwolf20.laserio.common.blocks.LaserNode;
 import com.direwolf20.laserio.common.containers.AbstractCardContainer;
 import com.direwolf20.laserio.common.items.cards.BaseCard;
+import com.direwolf20.laserio.util.MiscTools;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
 
@@ -13,6 +15,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.FormattedCharSequence;
 import net.minecraft.world.entity.player.Inventory;
@@ -26,6 +29,8 @@ import java.util.Map;
 
 public abstract class AbstractCardScreen<T extends AbstractCardContainer> extends AbstractContainerScreen<T>  {
 
+    public final static String ReturnButton = "return";
+    
     public final BaseCard.CardType CardType;
 
     private final ResourceLocation GUI = new ResourceLocation(LaserIO.MODID, "textures/gui/redstonecard.png");
@@ -54,11 +59,19 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
     public void addBackButton() {
         if (baseContainer.direction == -1)
             return;
-        buttons.put("return", new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
+        buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
             openNode();
         }));
         // NOTE: Return button -- perhaps put indication of direction and what is there near here?
     }
+
+    protected void renderTooltip(PoseStack pPoseStack, int mouseX, int mouseY) {
+        super.renderTooltip(pPoseStack, mouseX, mouseY);
+        Button returnButton = buttons.get(ReturnButton);
+        if (MiscTools.inBounds(returnButton, mouseX, mouseY)) {
+            this.renderTooltip(pPoseStack, new TranslatableComponent(LaserNode.SCREEN_LASERNODE), mouseX, mouseY);
+        }
+     }
 
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
