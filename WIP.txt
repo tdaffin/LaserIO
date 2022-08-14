@@ -1,3 +1,6 @@
 Laser IO
+    In Node GUI show the block that the side of the node is pointing at
+
     Show card type color somewhere on the card GUI
-        Also show which side/slot of the node the card is on
+        When the card is in a node, show which side/slot of the node the card is on
+        Also show the block that that side of the node is pointing at
