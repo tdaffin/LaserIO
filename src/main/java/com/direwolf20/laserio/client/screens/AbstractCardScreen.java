@@ -57,6 +57,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         buttons.put("return", new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
             openNode();
         }));
+        // NOTE: Return button -- perhaps put indication of direction and what is there near here?
     }
 
     @Override
