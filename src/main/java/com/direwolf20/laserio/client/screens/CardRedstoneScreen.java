@@ -74,7 +74,7 @@ public class CardRedstoneScreen extends AbstractContainerScreen<CardRedstoneCont
         ResourceLocation[] modeTextures = new ResourceLocation[2];
         modeTextures[0] = new ResourceLocation(LaserIO.MODID, "textures/gui/buttons/redstoneinput.png");
         modeTextures[1] = new ResourceLocation(LaserIO.MODID, "textures/gui/buttons/redstoneoutput.png");
-        buttons.put("mode", new ToggleButton(getGuiLeft() + 5, getGuiTop() + 5, 16, 16, modeTextures, currentMode, (button) -> {
+        buttons.put("mode", new ToggleButton(getGuiLeft() + 5, getGuiTop() + 25, 16, 16, modeTextures, currentMode, (button) -> {
             currentMode = CardRedstone.nextTransferMode(card);
             ((ToggleButton) button).setTexturePosition(currentMode);
             modeChange();
@@ -85,7 +85,7 @@ public class CardRedstoneScreen extends AbstractContainerScreen<CardRedstoneCont
         ResourceLocation[] strongTextures = new ResourceLocation[2];
         strongTextures[0] = new ResourceLocation(LaserIO.MODID, "textures/gui/buttons/redstonelow.png");
         strongTextures[1] = new ResourceLocation(LaserIO.MODID, "textures/gui/buttons/redstonehigh.png");
-        buttons.put("strong", new ToggleButton(getGuiLeft() + 5, getGuiTop() + 25, 16, 16, strongTextures, currentStrong ? 1 : 0, (button) -> {
+        buttons.put("strong", new ToggleButton(getGuiLeft() + 5, getGuiTop() + 45, 16, 16, strongTextures, currentStrong ? 1 : 0, (button) -> {
             currentStrong = !currentStrong;
             ((ToggleButton) button).setTexturePosition(currentStrong ? 1 : 0);
         }));
