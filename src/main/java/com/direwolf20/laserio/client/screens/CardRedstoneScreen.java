@@ -109,6 +109,7 @@ public class CardRedstoneScreen extends AbstractCardScreen<CardRedstoneContainer
             buttons.put("return", new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
                 openNode();
             }));
+            // NOTE: Return button -- perhaps put indication of direction and what is there near here?
         }
 
         for (Map.Entry<String, Button> button : buttons.entrySet()) {
