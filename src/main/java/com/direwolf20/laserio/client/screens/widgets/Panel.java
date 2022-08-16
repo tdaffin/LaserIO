@@ -18,6 +18,13 @@ public class Panel extends AbstractWidget {
     };
     protected final Panel.OnTooltip onTooltip;
 
+    public int outline = Color.BLACK.getRGB();
+    public int highLight = Color.WHITE.getRGB();
+    public int middle = Color.LIGHT_GRAY.getRGB();
+    public int shadow = Color.DARK_GRAY.getRGB();
+    public int background = Color.LIGHT_GRAY.getRGB();
+    public int style = 1;
+
     public Panel(int pX, int pY, int pWidth, int pHeight, Component pMessage) {
         this(pX, pY, pWidth, pHeight, pMessage, NO_TOOLTIP);
     }
@@ -33,11 +40,6 @@ public class Panel extends AbstractWidget {
             return;
         isHovered = pMouseX >= x && pMouseY >= y && pMouseX < x + width && pMouseY < y + height;
 
-        int outline = Color.BLACK.getRGB();
-        int highLight = Color.WHITE.getRGB();
-        int shadow = Color.DARK_GRAY.getRGB();
-        int background = Color.LIGHT_GRAY.getRGB();
-        int style = 1;
         if (style == 0){
             int outerInset = 1;
             int innerInset = 3;
@@ -57,8 +59,8 @@ public class Panel extends AbstractWidget {
             pixel(pPoseStack, x + 1, y + 1, outline);
             pixel(pPoseStack, x + width - 2, y + height - 2, outline);
 
-            pixel(pPoseStack, x + width - 3, y + 2, background);
-            pixel(pPoseStack, x + 2, y + height - 3, background);
+            pixel(pPoseStack, x + width - 3, y + 2, middle);
+            pixel(pPoseStack, x + 2, y + height - 3, middle);
 
             fill(pPoseStack, x + 2, y + 1, x + width - 3, y + 3, highLight);
             fill(pPoseStack, x + 1, y + 2, x + 3, y + height - 3, highLight);

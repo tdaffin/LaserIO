@@ -1,6 +1,7 @@
 package com.direwolf20.laserio.client.screens;
 
 import com.direwolf20.laserio.client.renderer.RenderUtils;
+import com.direwolf20.laserio.client.screens.widgets.CardHeaderPanel;
 import com.direwolf20.laserio.common.LaserIO;
 import com.direwolf20.laserio.common.blocks.LaserNode;
 import com.direwolf20.laserio.common.containers.AbstractCardContainer;
@@ -61,7 +62,17 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
 
     public abstract void openNode();
 
-    public void addBackButton() {
+    public void addCommonWidgets() {
+        Color color = RenderUtils.getColor(CardType);
+        CardHeaderPanel cardHeaderPanel = new CardHeaderPanel(getGuiLeft() + 4, getGuiTop() + 4, 74, 18, this.cardTypeName(), color.getRGB());
+        Color darker = color.darker();
+        Color darkerer = darker.darker();
+        Color dank = darkerer.darker();
+        cardHeaderPanel.middle = darker.getRGB();
+        cardHeaderPanel.shadow = darkerer.getRGB();
+        cardHeaderPanel.outline = dank.getRGB();
+        addRenderableWidget(cardHeaderPanel);
+
         //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
             return;
