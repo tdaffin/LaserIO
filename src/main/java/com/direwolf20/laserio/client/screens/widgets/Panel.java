@@ -34,6 +34,17 @@ public class Panel extends AbstractWidget {
         onTooltip = NO_TOOLTIP;
     }
 
+    public void setColorsFromHighlight(Color color){
+        highLight = color.getRGB();
+        Color darker = color.darker();
+        middle = darker.getRGB();
+        background = middle;
+        Color darkerer = darker.darker();
+        shadow = darkerer.getRGB();
+        Color dank = darkerer.darker();
+        outline = dank.getRGB();
+    }
+
     @Override
     public void render(PoseStack pPoseStack, int pMouseX, int pMouseY, float pPartialTick) {
         if (!visible)
@@ -71,6 +82,8 @@ public class Panel extends AbstractWidget {
             fill(pPoseStack, x + 3, y + 3, x + width - 3, y + height - 3, background);
 
             pixel(pPoseStack, x + 3, y + 3, highLight);
+            pixel(pPoseStack, x + width - 4, y + 3, middle);
+            pixel(pPoseStack, x + 3, y + height - 4, middle);
             pixel(pPoseStack, x + width - 4, y + width - 4, shadow);
         }
     }

@@ -13,6 +13,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.Widget;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
@@ -28,6 +29,7 @@ import net.minecraft.world.item.ItemStack;
 import java.awt.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public abstract class AbstractCardScreen<T extends AbstractCardContainer> extends AbstractContainerScreen<T>  {
@@ -47,6 +49,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
     protected final ItemStack card;
 
     protected Map<String, Button> buttons = new HashMap<>();
+    public final List<Widget> backgroundRenderables = new ArrayList<>();
 
     public AbstractCardScreen(T container, Inventory pPlayerInventory, Component pTitle) {
         super(container, pPlayerInventory, pTitle);
@@ -64,14 +67,12 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
 
     public void addCommonWidgets() {
         Color color = RenderUtils.getColor(CardType);
-        CardHeaderPanel cardHeaderPanel = new CardHeaderPanel(getGuiLeft() + 4, getGuiTop() + 4, 74, 18, this.cardTypeName(), color.getRGB());
-        Color darker = color.darker();
-        Color darkerer = darker.darker();
-        Color dank = darkerer.darker();
-        cardHeaderPanel.middle = darker.getRGB();
-        cardHeaderPanel.shadow = darkerer.getRGB();
-        cardHeaderPanel.outline = dank.getRGB();
-        addRenderableWidget(cardHeaderPanel);
+        //CardHeaderPanel cardHeaderPanel = new CardHeaderPanel(getGuiLeft() + 4, getGuiTop() + 4, 74, 18, this.cardTypeName(), color);
+        int outset = 5;
+        //int height = imageHeight + outset * 2;
+        int height = 85;
+        CardHeaderPanel cardHeaderPanel = new CardHeaderPanel(getGuiLeft() - outset, getGuiTop() - outset, imageWidth + outset*2, height, this.cardTypeName(), color);
+        backgroundRenderables.add(cardHeaderPanel);
 
         //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
@@ -100,6 +101,11 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
 
     @Override
     protected void renderBg(PoseStack matrixStack, float partialTicks, int mouseX, int mouseY) {
+        for(Widget widget : backgroundRenderables) {
+            widget.render(matrixStack, mouseX, mouseY, partialTicks);
+        }
+
+/*
         Color color = RenderUtils.getColor(CardType);
         Minecraft minecraft = Minecraft.getInstance();
         Font font = minecraft.font;
@@ -143,7 +149,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         //int j = getFGColor();
         int j = Color.WHITE.getRGB();
         drawCenteredString(matrixStack, font, text, x + width / 2, y + (height - 8) / 2, j | Mth.ceil(alpha * 255.0F) << 24);
-
+*/
         //FormattedCharSequence chars = text.getVisualOrderText();
         //float x = relX + this.imageWidth / 2f - font.width(text) / 2f;
         //float y = relY - HeaderOffset + ColorInset + 4;

@@ -8,12 +8,12 @@ import java.awt.Color;
 
 public class CardHeaderPanel extends Panel {
 
-    private int color;
+    private Color color;
 
-    public CardHeaderPanel(int pX, int pY, int pWidth, int pHeight, Component pMessage, int color) {
+    public CardHeaderPanel(int pX, int pY, int pWidth, int pHeight, Component pMessage, Color color) {
         super(pX, pY, pWidth, pHeight, pMessage);
         this.color = color;
-        this.highLight = color;
+        setColorsFromHighlight(color);
     }
 
     @Override
