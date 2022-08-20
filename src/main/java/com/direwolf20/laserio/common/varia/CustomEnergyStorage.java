@@ -13,6 +13,14 @@ public class CustomEnergyStorage extends EnergyStorage {
         //setChanged();
     }
 
+    public void setEnergy(int energy) {
+        int startEnergy = getEnergyStored();
+        extractEnergy(startEnergy, false);
+        receiveEnergy(energy, false);
+        if (getEnergyStored() != startEnergy)
+            onEnergyChanged();
+    }
+
     public int addEnergy(int energy) {
         int added = receiveEnergy(energy, false);
         if (added != 0)
