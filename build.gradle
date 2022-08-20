@@ -231,8 +231,7 @@ dependencies {
     //runtimeOnly fg.deobf("ignored:supermartijn642corelib:1.0.18") // already on the forge maven
     //runtimeOnly fg.deobf("curse.maven:trash-cans-394535:3773710") // already on the forge maven
     //TOP
-    implementation fg.deobf("curse.maven:the-one-probe-245211:3550084")
-    //Exception in thread "main" java.lang.module.ResolutionException: Modules mcjtylib and theoneprobe export package mcjty.lib.api.power to module minecraft
+    implementation fg.deobf("curse.maven:the-one-probe-245211:3927518")
 
     //Spark
     //runtimeOnly fg.deobf("curse.maven:spark-361579:3767286")
