@@ -1,6 +1,7 @@
 package com.direwolf20.laserio.datagen;
 
 import com.direwolf20.laserio.common.LaserIO;
+import com.direwolf20.laserio.common.blocks.PowergenBlock;
 import com.direwolf20.laserio.setup.Registration;
 import net.minecraft.data.DataGenerator;
 import net.minecraftforge.common.data.LanguageProvider;
@@ -102,5 +103,10 @@ public class LaserIOLanguageProvider extends LanguageProvider {
         add("laserio.tooltip.item.filter.nbt.deny", "False");
 
         //add("", "");
+
+        add(Registration.POWERGEN.get(), "Power generator");
+        add(PowergenBlock.SCREEN_TUTORIAL_POWERGEN, "Power generator");
+        add(PowergenBlock.MESSAGE_POWERGEN, "Power generator generating %s per tick");
+        
     }
 }

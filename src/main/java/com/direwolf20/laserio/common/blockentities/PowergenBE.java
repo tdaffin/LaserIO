@@ -156,7 +156,7 @@ public class PowergenBE extends BlockEntity {
     }
     
     private CustomEnergyStorage createEnergy() {
-        return new CustomEnergyStorage(POWERGEN_CAPACITY, 0) {
+        return new CustomEnergyStorage(POWERGEN_CAPACITY, POWERGEN_SEND) {
             @Override
             protected void onEnergyChanged() {
                 setChanged();

@@ -1,6 +1,7 @@
 {
   "block.laserio.laser_connector": "Laser Connector",
   "block.laserio.laser_node": "Laser Node",
+  "block.laserio.powergen": "Power generator",
   "item.laserio.card_energy": "Energy Card",
   "item.laserio.card_fluid": "Fluid Card",
   "item.laserio.card_holder": "Card Holder",
@@ -36,6 +37,7 @@
   "laserio.tooltip.item.filter.type.deny": "Deny",
   "laserio.tooltip.item.show_settings": "Hold shift to show settings",
   "message.laserio.wrenchrange": "Connection exceeds maximum range of %d",
+  "message.powergen": "Power generator generating %s per tick",
   "screen.laserio.allowlist": "Allow",
   "screen.laserio.and": "And",
   "screen.laserio.channel": "Channel: ",
@@ -74,5 +76,6 @@
   "screen.laserio.true": "True",
   "screen.laserio.up": "Up",
   "screen.laserio.weak": "Weak",
-  "screen.laserio.west": "West"
+  "screen.laserio.west": "West",
+  "screen.tutorial.powergen": "Power generator"
 }

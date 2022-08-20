@@ -13,5 +13,6 @@ public class LaserIOLootTables extends BaseLootTableProvider {
     protected void addTables() {
         lootTables.put(Registration.LaserNode.get(), createSimpleTable("lasernode", Registration.LaserNode.get()));
         lootTables.put(Registration.LaserConnector.get(), createSimpleTable("laserconnector", Registration.LaserConnector.get()));
+        lootTables.put(Registration.POWERGEN.get(), createStandardTable("powergen", Registration.POWERGEN.get(), Registration.POWERGEN_BE.get()));
     }
 }

@@ -1,4 +1,6 @@
-a227890b9b0ab34e3073c65ecf3b55e90b73f257 assets/laserio/lang/en_us.json
+9182fb1f669b0987a00b3098d65c61839f9b3790 assets/laserio/blockstates/powergen.json
+008309910d464352b370f29b29518b5691a9cb9b assets/laserio/lang/en_us.json
+c3871939367a89b7219208155128293b08b63d5f assets/laserio/models/block/powergen.json
 f0e6560d7934862023d2eb87a795d45903b63b7d assets/laserio/models/item/card_holder.json
 4eb00592c18006de8ed3573a59681a6637ee772b assets/laserio/models/item/filter_basic.json
 c15661e6248d1169e158735b11d5a4839b53c01f assets/laserio/models/item/filter_count.json
@@ -11,6 +13,7 @@ f078ab97fe0309dbc315d95974a60e441f37515c assets/laserio/models/item/laser_wrench
 e1e7cda56571876f5f38f190311be8346a122bf4 assets/laserio/models/item/logic_chip_raw.json
 f0a6f3c6387d669d27040cab69453995d7c19224 assets/laserio/models/item/overclocker_card.json
 29b1fdfcfa5dccd723ba9146e18ac774f75079a9 assets/laserio/models/item/overclocker_node.json
+fda1d713c59fb0439087270e2078e5b01ab612ce assets/laserio/models/item/powergen.json
 3e686c002ab4d0e89fabc1b09d891fd34d8d0078 data/laserio/advancements/recipes/laserio/card_energy.json
 8beafc75eee288d4bbe1b25532f949ea986b53e1 data/laserio/advancements/recipes/laserio/card_energy_nbtclear.json
 397bdffd6aea40cd57c9055c127a3555e9e8158e data/laserio/advancements/recipes/laserio/card_fluid.json
@@ -35,8 +38,10 @@ b9efbb321ac639e2e536cc544e906484921d9bd3 data/laserio/advancements/recipes/laser
 7d459478511bdaa96c705c76ec046da711fb42e0 data/laserio/advancements/recipes/laserio/logic_chip_raw.json
 e8693d7b0e9dc1f47523375d4f397e40173b4a11 data/laserio/advancements/recipes/laserio/overclocker_card.json
 952b68239fa8db3463b3ffcf46c2b8fc6875d764 data/laserio/advancements/recipes/laserio/overclocker_node.json
+7dcb0df0c0b25de89793fb7f76d0e8b43eb8c129 data/laserio/advancements/recipes/laserio/powergen.json
 d0a9bd770fa4ac669626c1c8b07c197352550402 data/laserio/loot_tables/blocks/laser_connector.json
 943db5dfdaa8bad875dbae800312eebe4b53ed1a data/laserio/loot_tables/blocks/laser_node.json
+32552803eb5e2c9d3e7ddad0037aa2e4bff94f15 data/laserio/loot_tables/blocks/powergen.json
 c480445a71b155da591a449962941d0673415e53 data/laserio/recipes/card_energy.json
 3d68f173a06c58f90b1d6e467f64d1c994e92ec4 data/laserio/recipes/card_energy_nbtclear.json
 8fd96f7e0501a9263fbf0e7d5d6138916cb779ad data/laserio/recipes/card_fluid.json
@@ -61,4 +66,5 @@ efdb031ace3eb4c8582f409119d340693069d65a data/laserio/recipes/laser_node.json
 8008e21a5cb8221d98389bef9e0847a0b3720691 data/laserio/recipes/logic_chip_raw.json
 c33d5bebcc57eda191c8fde669a4c4d96d59c41b data/laserio/recipes/overclocker_card.json
 ca083a8687beff9b29c3b9ae066c108240c45550 data/laserio/recipes/overclocker_node.json
-c677eb1f4b934afbbdec3ac307c2c01ad944ccbf data/minecraft/tags/blocks/mineable/pickaxe.json
+744f0b2dabfe8dd432dcaa33ec887b93a7539850 data/laserio/recipes/powergen.json
+d1952b1ce8557395715a861c0f6be7ccd6bcdc59 data/minecraft/tags/blocks/mineable/pickaxe.json

@@ -226,5 +226,17 @@ public class LaserIORecipes extends RecipeProvider {
                 .unlockedBy("has_filter_mod", InventoryChangeTrigger.TriggerInstance.hasItems(Registration.Filter_Mod.get()))
                 .save(consumer, Registration.Filter_Mod.getId() + "_nbtclear");
 
+        var specialItem = Registration.Logic_Chip.get();
+        ShapedRecipeBuilder.shaped(Registration.POWERGEN.get())
+                .pattern("mmm")
+                .pattern("x#x")
+                .pattern("#x#")
+                .define('x', Tags.Items.DUSTS_REDSTONE)
+                .define('#', Tags.Items.INGOTS_IRON)
+                .define('m', specialItem)
+                .group("laserio")
+                .unlockedBy("has_logic_chip", InventoryChangeTrigger.TriggerInstance.hasItems(specialItem))
+                .save(consumer);
+
     }
 }
