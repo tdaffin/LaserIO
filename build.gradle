@@ -257,6 +257,8 @@ dependencies {
     implementation fg.deobf("curse.maven:common-capabilities-247007:3768491");
     implementation fg.deobf("curse.maven:integrated-dynamics-236307:3928077");
     implementation fg.deobf("curse.maven:integrated-tunnels-251389:3900670");
+    implementation fg.deobf("curse.maven:integrated-crafting-287357:3804733");
+    implementation fg.deobf("curse.maven:integrated-terminals-295910:3824478");
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
