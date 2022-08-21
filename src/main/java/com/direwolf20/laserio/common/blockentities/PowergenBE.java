@@ -54,9 +54,17 @@ public class PowergenBE extends BlockEntity {
 
     public void tickServer() {
         if (genTicks > 0) {
-            energyStorage.addEnergy(POWERGEN_GENERATE);
+            int generated = POWERGEN_GENERATE;
+            int willAdd = energyStorage.receiveEnergy(generated, true);
+            if (willAdd < generated){
+
+            }
+            int added = energyStorage.addEnergy(generated);
+            //if (added < generated)
+            if (added > 0){
             genTicks--;
             setChanged();
+            }
         }
 
         if (genTicks <= 0) {
