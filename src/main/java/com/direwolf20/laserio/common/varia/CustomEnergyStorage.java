@@ -21,8 +21,7 @@ public class CustomEnergyStorage extends EnergyStorage {
 
     public void setEnergy(int energy) {
         int startEnergy = getEnergyStored();
-        extractEnergy(startEnergy, false);
-        receiveEnergy(energy, false);
+        this.energy = Math.min(energy, capacity);
         if (getEnergyStored() != startEnergy)
             onEnergyChanged();
     }
