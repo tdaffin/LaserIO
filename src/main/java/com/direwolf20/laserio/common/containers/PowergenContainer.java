@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Nonnull;
 
+import com.direwolf20.laserio.common.blockentities.PowergenBE;
 import com.direwolf20.laserio.common.varia.CustomEnergyStorage;
 import com.direwolf20.laserio.setup.Registration;
 
@@ -34,6 +35,7 @@ public class PowergenContainer extends AbstractContainerMenu {
     private Player playerEntity;
     private IItemHandler playerInventory;
     private List<Slot> slots = new ArrayList<Slot>();
+    private int genTicks;
 
     public PowergenContainer(int windowId, BlockPos pos, Inventory inv, Player player) {
         super(Registration.POWERGEN_CONTAINER.get(), windowId);
@@ -56,6 +58,7 @@ public class PowergenContainer extends AbstractContainerMenu {
         topRow += 58;
         addSlotRange(playerInventory, 0, leftCol, topRow, 9, 18);
         trackPower();
+        trackGeneration();
     }
 
     // Setup syncing of power from server to client so that the GUI can show the amount of power in the block
@@ -92,8 +95,29 @@ public class PowergenContainer extends AbstractContainerMenu {
         });
     }
 
+    private void trackGeneration(){
+        addDataSlot(new DataSlot() {
+            @Override
+            public int get() {
+                if (blockEntity instanceof PowergenBE be){
+                    return be.getGenTicks();
+                }
+                return 0;
+            }
+
+            @Override
+            public void set(int value) {
+                genTicks = value;
+            }
+        });
+    }
+
     public LazyOptional<IEnergyStorage> getEnergyStorage() {
         return blockEntity.getCapability(CapabilityEnergy.ENERGY);
+    }
+
+    public int getGenTicks(){
+        return genTicks;
     }
 
     public int getEnergy() {

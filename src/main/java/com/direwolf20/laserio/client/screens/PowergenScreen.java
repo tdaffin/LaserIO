@@ -48,15 +48,22 @@ public class PowergenScreen extends AbstractContainerScreen<PowergenContainer> {
 
     @Override
     protected void renderLabels(PoseStack matrixStack, int mouseX, int mouseY) {
-        String text = "Energy: ";
+        String energyText = "Energy: ";
         var storage = menu.getEnergyStorage().resolve().get();
         if (storage != null){
             int energy = storage.getEnergyStored();
             int capacity = storage.getMaxEnergyStored();
-            text += energy + " / " + capacity;
+            energyText += energy + " / " + capacity;
         } else
-            text += "No Storage";
-        drawString(matrixStack, Minecraft.getInstance().font, text, 10, 10, 0xffffff);
+            energyText += "No Storage";
+        var genTicks = menu.getGenTicks();
+        String genText = "Idle";
+        if (genTicks > 0){
+            genText = "Generation: " + genTicks;
+        }
+        var font = Minecraft.getInstance().font;
+        drawString(matrixStack, font, energyText, 10, 10, 0xffffff);
+        drawString(matrixStack, font, genText, 10, 45, 0xffffff);
     }
 
     @Override

@@ -45,6 +45,10 @@ public class PowergenBE extends BlockEntity {
         super(Registration.POWERGEN_BE.get(), pWorldPosition, pBlockState);
     }
 
+    public int getGenTicks(){
+        return genTicks;
+    }
+
     @Override
     public void setRemoved() {
         super.setRemoved();
