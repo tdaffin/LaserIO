@@ -11,6 +11,7 @@ import com.direwolf20.laserio.common.items.CardHolder;
 import com.direwolf20.laserio.common.items.LaserWrench;
 import com.direwolf20.laserio.common.items.LogicChip;
 import com.direwolf20.laserio.common.items.LogicChipRaw;
+import com.direwolf20.laserio.common.items.PowergenItem;
 import com.direwolf20.laserio.common.items.cards.CardEnergy;
 import com.direwolf20.laserio.common.items.cards.CardFluid;
 import com.direwolf20.laserio.common.items.cards.CardItem;
@@ -115,6 +116,6 @@ public class Registration {
 
     // Conveniance function: Take a RegistryObject<Block> and make a corresponding RegistryObject<Item> from it
     public static <B extends Block> RegistryObject<Item> fromBlock(RegistryObject<B> block) {
-        return ITEMS.register(block.getId().getPath(), () -> new BlockItem(block.get(), ITEM_PROPERTIES));
+        return ITEMS.register(block.getId().getPath(), () -> new PowergenItem(block.get(), ITEM_PROPERTIES));
     }
 }

@@ -6,5 +6,4 @@ Laser IO
         Also show the block that that side of the node is pointing at
 
 Tutorial
-    Show extended tooltip for PowergenBlock
     Allow Powergen block that has been placed in world but not modified to stack with virgin
