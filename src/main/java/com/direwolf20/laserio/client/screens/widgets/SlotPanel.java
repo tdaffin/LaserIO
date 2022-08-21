@@ -13,28 +13,28 @@ import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class Panel extends AbstractWidget {
+public class SlotPanel extends AbstractWidget {
     public static final Panel.OnTooltip NO_TOOLTIP = (p_93740_, p_93741_, p_93742_, p_93743_) -> {
     };
     protected final Panel.OnTooltip onTooltip;
 
     public int outline = Color.BLACK.getRGB();
     public int highLight = Color.WHITE.getRGB();
-    public int middle = Color.LIGHT_GRAY.getRGB();
+    public int middle = Color.LIGHT_GRAY.darker().getRGB();
     public int shadow = Color.DARK_GRAY.getRGB();
-    public int background = Color.LIGHT_GRAY.getRGB();
-    public int style = 1;
+    public int background = Color.LIGHT_GRAY.darker().getRGB();
+    public int style = 0;
 
-    public Panel(int pX, int pY, int pWidth, int pHeight) {
-        this(pX, pY, pWidth, pHeight, TextComponent.EMPTY);
+    public SlotPanel(int pX, int pY) {
+        this(pX, pY, TextComponent.EMPTY, NO_TOOLTIP);
     }
 
-    public Panel(int pX, int pY, int pWidth, int pHeight, Component pMessage) {
-        this(pX, pY, pWidth, pHeight, pMessage, NO_TOOLTIP);
+    public SlotPanel(int pX, int pY, Component pMessage) {
+        this(pX, pY, pMessage, NO_TOOLTIP);
     }
 
-    public Panel(int pX, int pY, int pWidth, int pHeight, Component pMessage, Panel.OnTooltip pOnTooltip) {
-        super(pX, pY, pWidth, pHeight, pMessage);
+    public SlotPanel(int pX, int pY, Component pMessage, Panel.OnTooltip pOnTooltip) {
+        super(pX, pY, 18, 18, pMessage);
         onTooltip = NO_TOOLTIP;
     }
 
@@ -56,12 +56,14 @@ public class Panel extends AbstractWidget {
         isHovered = pMouseX >= x && pMouseY >= y && pMouseX < x + width && pMouseY < y + height;
 
         if (style == 0){
-            int outerInset = 1;
-            int innerInset = 3;
-            fill(pPoseStack, x, y, x + width, y + height, outline);
-            fill(pPoseStack, x + outerInset, y + outerInset, x + width - innerInset, y + height - innerInset, highLight);
-            fill(pPoseStack, x + innerInset, y + innerInset, x + width - outerInset, y + height - outerInset, shadow);
+            int outerInset = 0;
+            int innerInset = 1;
+            //fill(pPoseStack, x, y, x + width, y + height, outline);
+            fill(pPoseStack, x + outerInset, y + outerInset, x + width - innerInset, y + height - innerInset, shadow);
+            fill(pPoseStack, x + innerInset, y + innerInset, x + width - outerInset, y + height - outerInset, highLight);
             fill(pPoseStack, x + innerInset, y + innerInset, x + width - innerInset, y + height - innerInset, background);
+            pixel(pPoseStack, x + width - 1, y, middle);
+            pixel(pPoseStack, x, y + height - 1, middle);
         } else {
             hLine(pPoseStack, x + 2, x + width - 4, y, outline);
             hLine(pPoseStack, x + 3, x + width - 3, y + height - 1, outline);

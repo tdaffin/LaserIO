@@ -1,5 +1,10 @@
 package com.direwolf20.laserio.common.containers;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.annotation.Nonnull;
+
 import com.direwolf20.laserio.common.varia.CustomEnergyStorage;
 import com.direwolf20.laserio.setup.Registration;
 
@@ -15,6 +20,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraftforge.common.ForgeHooks;
+import net.minecraftforge.common.util.LazyOptional;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 import net.minecraftforge.items.CapabilityItemHandler;
@@ -27,6 +33,7 @@ public class PowergenContainer extends AbstractContainerMenu {
     private BlockEntity blockEntity;
     private Player playerEntity;
     private IItemHandler playerInventory;
+    private List<Slot> slots = new ArrayList<Slot>();
 
     public PowergenContainer(int windowId, BlockPos pos, Inventory inv, Player player) {
         super(Registration.POWERGEN_CONTAINER.get(), windowId);
@@ -63,7 +70,7 @@ public class PowergenContainer extends AbstractContainerMenu {
 
             @Override
             public void set(int value) {
-                blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
+                getEnergyStorage().ifPresent(h -> {
                     int energyStored = h.getEnergyStored() & 0xffff0000;
                     ((CustomEnergyStorage)h).setEnergy(energyStored + (value & 0xffff));
                 });
@@ -77,7 +84,7 @@ public class PowergenContainer extends AbstractContainerMenu {
 
             @Override
             public void set(int value) {
-                blockEntity.getCapability(CapabilityEnergy.ENERGY).ifPresent(h -> {
+                getEnergyStorage().ifPresent(h -> {
                     int energyStored = h.getEnergyStored() & 0x0000ffff;
                     ((CustomEnergyStorage)h).setEnergy(energyStored | (value << 16));
                 });
@@ -85,8 +92,12 @@ public class PowergenContainer extends AbstractContainerMenu {
         });
     }
 
+    public LazyOptional<IEnergyStorage> getEnergyStorage() {
+        return blockEntity.getCapability(CapabilityEnergy.ENERGY);
+    }
+
     public int getEnergy() {
-        return blockEntity.getCapability(CapabilityEnergy.ENERGY).map(IEnergyStorage::getEnergyStored).orElse(0);
+        return getEnergyStorage().map(IEnergyStorage::getEnergyStored).orElse(0);
     }
 
     @Override
@@ -134,6 +145,17 @@ public class PowergenContainer extends AbstractContainerMenu {
         }
 
         return itemstack;
+    }
+
+    public List<Slot> getSlots(){
+        return slots;
+    }
+
+    @Override
+    protected Slot addSlot(Slot pSlot) {
+        var slot = super.addSlot(pSlot);
+        this.slots.add(slot);
+        return slot;
     }
 
     private int addSlotRange(IItemHandler handler, int index, int x, int y, int amount, int dx) {
