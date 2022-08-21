@@ -62,8 +62,8 @@ public class PowergenBE extends BlockEntity {
             int added = energyStorage.addEnergy(generated);
             //if (added < generated)
             if (added > 0){
-            genTicks--;
-            setChanged();
+                genTicks--;
+                setChanged();
             }
         }
 
@@ -135,6 +135,11 @@ public class PowergenBE extends BlockEntity {
         CompoundTag infoTag = new CompoundTag();
         infoTag.putInt(TagGenTicks, genTicks);
         tag.put(TagInfo, infoTag);
+    }
+
+    @Override
+    public CompoundTag getTileData() {
+       return super.getTileData();
     }
 
     private ItemStackHandler createHandler() {

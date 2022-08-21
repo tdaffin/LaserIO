@@ -13,6 +13,12 @@ public class CustomEnergyStorage extends EnergyStorage {
         //setChanged();
     }
 
+    @Override
+    public int getEnergyStored()
+    {
+        return energy;
+    }
+
     public void setEnergy(int energy) {
         int startEnergy = getEnergyStored();
         extractEnergy(startEnergy, false);
