@@ -133,12 +133,52 @@ public class PowergenBE extends BlockEntity {
 
     @Override
     public void saveAdditional(CompoundTag tag) {
-        tag.put(TagInventory, itemHandler.serializeNBT());
-        tag.put(TagEnergy, energyStorage.serializeNBT());
+        // This happens when you place it in the world (and other times too)
+        //         /*var tag = getBlockEntityData(pStack);
+        /*if (tag != null){
+            var defaultState = Registration.POWERGEN.get().defaultBlockState();
+            // Check if 'empty'
+            var empty = Registration.POWERGEN_BE.get().create(worldPosition, defaultState);
+            //empty.getGenTicks() ==0;
+        }
+        
+        //ItemStack itemstack = pItemEntity.getItem();
+        //var tag = getBlockEntityData(itemstack);
+        if (tag == null)
+            return;
+        //
+        if (tag.contains("Items", 9)) {
+            var listtag = tag.getList("Items", 10);
+            if (listtag.size() == 0){
 
-        CompoundTag infoTag = new CompoundTag();
-        infoTag.putInt(TagGenTicks, genTicks);
-        tag.put(TagInfo, infoTag);
+            }
+            //ItemUtils.onContainerDestroyed(pItemEntity, listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of));
+        }*/
+
+        boolean hasItems = false;
+        for(int i = 0, n = itemHandler.getSlots(); i < n; ++i){
+            var stack = itemHandler.getStackInSlot(i);
+            if (stack.getCount() > 0)
+                hasItems = true;
+        }
+        if(hasItems)
+            tag.put(TagInventory, itemHandler.serializeNBT());
+        else
+            tag.remove(TagInventory);
+        if (energyStorage.getEnergyStored() > 0)
+            tag.put(TagEnergy, energyStorage.serializeNBT());
+        else
+            tag.remove(TagEnergy);
+        if (genTicks > 0){
+            CompoundTag infoTag = new CompoundTag();
+            infoTag.putInt(TagGenTicks, genTicks);
+            tag.put(TagInfo, infoTag);
+        } else
+            tag.remove(TagInfo);
+        if (tag.size() == 0){
+            // Remove the tag entirely?
+            tag.getAsString();
+        }
     }
 
     @Override
