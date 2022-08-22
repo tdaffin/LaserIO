@@ -13,8 +13,11 @@ import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.TextComponent;
+import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ClickAction;
+import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.TooltipFlag;
@@ -60,6 +63,16 @@ public class PowergenItem extends BlockItem {
     }
 
     @Override
+    public boolean overrideStackedOnOther(ItemStack pStack, Slot pSlot, ClickAction pAction, Player pPlayer) {
+        return false;
+    }
+  
+    @Override
+    public boolean overrideOtherStackedOnMe(ItemStack pStack, ItemStack pOther, Slot pSlot, ClickAction pAction, Player pPlayer, SlotAccess pAccess) {
+        return false;
+    }
+
+    @Override
     protected boolean updateCustomBlockEntityTag(BlockPos pPos, Level pLevel, @Nullable Player pPlayer, ItemStack pStack, BlockState pState) {
         // Called when put block down
         return super.updateCustomBlockEntityTag(pLevel, pPlayer, pPos, pStack);
@@ -68,6 +81,8 @@ public class PowergenItem extends BlockItem {
     @Override
     public void onDestroyed(ItemEntity pItemEntity) {
         // Not getting called
+        // See PowergenBE.saveAdditional
+        //this.setBlockEntityData(p_186339_, p_186340_, p_186341_);
      }
     
 }
