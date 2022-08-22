@@ -105,14 +105,6 @@ public class PowergenBlock extends Block implements EntityBlock {
     public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
         // Should be called after this block is removed by a player
         super.destroy(pLevel, pPos, pState);
-        /*var tag = getBlockEntityData(pStack);
-        if (tag != null){
-            // Check if 'empty'
-            var empty = Registration.POWERGEN_BE.get().create(pPos, pState);
-            //empty.getGenTicks() ==0;
-        }
-        
-        this.defaultBlockState();*/
     }
 
     /**

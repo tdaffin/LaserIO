@@ -68,19 +68,6 @@ public class PowergenItem extends BlockItem {
     @Override
     public void onDestroyed(ItemEntity pItemEntity) {
         // Not getting called
-        ItemStack itemstack = pItemEntity.getItem();
-        var tag = getBlockEntityData(itemstack);
-        if (tag == null)
-            return;
-        //
-        if (tag.contains("Items", 9)) {
-            var listtag = tag.getList("Items", 10);
-            if (listtag.size() == 0){
-
-            }
-            //ItemUtils.onContainerDestroyed(pItemEntity, listtag.stream().map(CompoundTag.class::cast).map(ItemStack::of));
-        }
-
      }
     
 }
