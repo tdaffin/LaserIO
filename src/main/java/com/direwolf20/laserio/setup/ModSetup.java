@@ -1,5 +1,6 @@
 package com.direwolf20.laserio.setup;
 
+import com.direwolf20.laserio.common.events.PickupItemHandler;
 import com.direwolf20.laserio.common.events.ServerTickHandler;
 import com.direwolf20.laserio.common.network.PacketHandler;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,6 +12,7 @@ public class ModSetup {
     public static void init(final FMLCommonSetupEvent event) {
         PacketHandler.register();
         MinecraftForge.EVENT_BUS.register(ServerTickHandler.class);
+        MinecraftForge.EVENT_BUS.register(PickupItemHandler.class);
     }
 
     public static final String TAB_NAME = "laserio";
