@@ -15,8 +15,10 @@ import net.minecraft.world.MenuProvider;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SoundType;
@@ -97,5 +99,30 @@ public class PowergenBlock extends Block implements EntityBlock {
             }
         }
         return InteractionResult.SUCCESS;
+    }
+
+    @Override
+    public void destroy(LevelAccessor pLevel, BlockPos pPos, BlockState pState) {
+        // Should be called after this block is removed by a player
+        super.destroy(pLevel, pPos, pState);
+        /*var tag = getBlockEntityData(pStack);
+        if (tag != null){
+            // Check if 'empty'
+            var empty = Registration.POWERGEN_BE.get().create(pPos, pState);
+            //empty.getGenTicks() ==0;
+        }
+        
+        this.defaultBlockState();*/
+    }
+
+    /**
+     * Called after a player has successfully harvested this block. This method will only be called if the player has
+     * used the correct tool and drops should be spawned.
+     */
+    public void playerDestroy(Level pLevel, Player pPlayer, BlockPos pPos, BlockState pState, @Nullable BlockEntity pBlockEntity, ItemStack pTool) {
+        //pPlayer.awardStat(Stats.BLOCK_MINED.get(this));
+        //pPlayer.causeFoodExhaustion(0.005F);
+        //dropResources(pState, pLevel, pPos, pBlockEntity, pPlayer, pTool);
+        super.playerDestroy(pLevel, pPlayer, pPos, pState, pBlockEntity, pTool);
     }
 }
