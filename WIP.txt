@@ -7,3 +7,12 @@ Laser IO
 
 Tutorial
     Allow Powergen block that has been placed in world but not modified to stack with virgin
+        DONE!
+
+    Add particle render to powergen block
+    block/effect/dire.png
+        item/dire.png
+            /laser_glow.png
+        
+        https://www.youtube.com/watch?v=FOELvN6rGPQ
+        https://youtu.be/FOELvN6rGPQ?t=3269
