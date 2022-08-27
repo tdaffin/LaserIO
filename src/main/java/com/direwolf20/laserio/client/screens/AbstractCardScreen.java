@@ -2,6 +2,8 @@ package com.direwolf20.laserio.client.screens;
 
 import com.direwolf20.laserio.client.renderer.RenderUtils;
 import com.direwolf20.laserio.client.screens.widgets.CardHeaderPanel;
+import com.direwolf20.laserio.client.screens.widgets.Panel;
+import com.direwolf20.laserio.client.screens.widgets.SidePanel;
 import com.direwolf20.laserio.common.LaserIO;
 import com.direwolf20.laserio.common.blocks.LaserNode;
 import com.direwolf20.laserio.common.containers.AbstractCardContainer;
@@ -35,6 +37,8 @@ import java.util.Map;
 public abstract class AbstractCardScreen<T extends AbstractCardContainer> extends AbstractContainerScreen<T>  {
 
     public final static String ReturnButton = "return";
+    public final static String SideButton = "side";
+    public final static String HeaderPanel = "header";
     
     public final BaseCard.CardType CardType;
 
@@ -49,7 +53,8 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
     protected final ItemStack card;
 
     protected Map<String, Button> buttons = new HashMap<>();
-    public final List<Widget> backgroundRenderables = new ArrayList<>();
+    public final Map<String, AbstractWidget> widgets = new HashMap<>();
+    public final List<AbstractWidget> backgroundRenderables = new ArrayList<>();
 
     public AbstractCardScreen(T container, Inventory pPlayerInventory, Component pTitle) {
         super(container, pPlayerInventory, pTitle);
@@ -77,10 +82,24 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
             return;
-        buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, new TextComponent("<--"), (button) -> {
+        var sideCmp = LaserNodeScreen.sides[baseContainer.direction];
+        var sideName = sideCmp.getString();
+        //    font.draw(matrixStack, .getString(), imageWidth / 2 - font.width(sides[container.side].getString()) / 2, 20, Color.DARK_GRAY.getRGB());
+        var returnText = new TextComponent("<--");
+        buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, returnText, (button) -> {
             openNode();
         }));
         // NOTE: Return button -- perhaps put indication of direction and what is there near here?
+
+        var beFaced = baseContainer.getBlockFaced();
+        if (beFaced != null){
+            sideName += ": " + beFaced.getBlockState().getBlock().getName().getString();
+        }
+        var sideText = new TextComponent(sideName);
+        //var sideText = sideCmp;
+        var sideWidget = new SidePanel(getGuiLeft() - 32, getGuiTop() + 26, 30, 40, sideText, color);
+        widgets.put(SideButton, sideWidget);
+        addRenderableOnly(sideWidget);
     }
 
     protected void renderTooltip(PoseStack pPoseStack, int mouseX, int mouseY) {
@@ -89,6 +108,12 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         if (MiscTools.inBounds(returnButton, mouseX, mouseY)) {
             ArrayList<Component> tooltips = new ArrayList<Component>();
             tooltips.add(new TranslatableComponent(LaserNode.SCREEN_LASERNODE));
+            //tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
+            this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
+        }
+        AbstractWidget sideButton = widgets.get(SideButton);
+        if (MiscTools.inBounds(sideButton, mouseX, mouseY)) {
+            ArrayList<Component> tooltips = new ArrayList<Component>();
             tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
             this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
