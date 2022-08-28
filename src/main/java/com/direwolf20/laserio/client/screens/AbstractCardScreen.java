@@ -55,6 +55,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
     protected Map<String, Button> buttons = new HashMap<>();
     public final Map<String, AbstractWidget> widgets = new HashMap<>();
     public final List<AbstractWidget> backgroundRenderables = new ArrayList<>();
+    private String sideName;
 
     public AbstractCardScreen(T container, Inventory pPlayerInventory, Component pTitle) {
         super(container, pPlayerInventory, pTitle);
@@ -82,22 +83,29 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
             return;
-        var sideCmp = LaserNodeScreen.sides[baseContainer.direction];
-        var sideName = sideCmp.getString();
-        //    font.draw(matrixStack, .getString(), imageWidth / 2 - font.width(sides[container.side].getString()) / 2, 20, Color.DARK_GRAY.getRGB());
         var returnText = new TextComponent("<--");
         buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, returnText, (button) -> {
             openNode();
         }));
         // NOTE: Return button -- perhaps put indication of direction and what is there near here?
 
-        var beFaced = baseContainer.getBlockFaced();
-        if (beFaced != null){
-            sideName += ": " + beFaced.getBlockState().getBlock().getName().getString();
+        var sideCmp = LaserNodeScreen.sides[baseContainer.direction];
+        sideName = sideCmp.getString();
+        ItemStack blockItemStack = null;
+        var stateFaced = baseContainer.getBlockStateFaced();
+        if (stateFaced != null){
+            var blockFaced = stateFaced.getBlock();
+            if (blockFaced != null){
+                sideName += ": " + blockFaced.getName().getString();
+                var blockItem = blockFaced.asItem();
+                if (blockItem != null)
+                    blockItemStack = new ItemStack(blockItem);
+            }
         }
-        var sideText = new TextComponent(sideName);
-        //var sideText = sideCmp;
-        var sideWidget = new SidePanel(getGuiLeft() - 32, getGuiTop() + 26, 30, 40, sideText, color);
+        var sideText = sideCmp;
+        int x = getGuiLeft() - 37, y = getGuiTop() + 26;
+        int w = 40, h = 40;
+        var sideWidget = new SidePanel(x, y, w, h, sideText, color, blockItemStack, this.itemRenderer);
         widgets.put(SideButton, sideWidget);
         addRenderableOnly(sideWidget);
     }
@@ -111,10 +119,12 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
             //tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
             this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
-        AbstractWidget sideButton = widgets.get(SideButton);
-        if (MiscTools.inBounds(sideButton, mouseX, mouseY)) {
+        AbstractWidget sideWidget = widgets.get(SideButton);
+        if (MiscTools.inBounds(sideWidget, mouseX, mouseY)) {
             ArrayList<Component> tooltips = new ArrayList<Component>();
-            tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
+            //tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
+            //tooltips.add(sideWidget.getMessage());
+            tooltips.add(new TextComponent(sideName));
             this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
     }

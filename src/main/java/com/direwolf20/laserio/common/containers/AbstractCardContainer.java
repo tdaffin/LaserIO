@@ -12,6 +12,7 @@ import net.minecraft.world.inventory.MenuType;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
 import net.minecraftforge.items.IItemHandler;
 
 public abstract class AbstractCardContainer extends AbstractContainerMenu {
@@ -51,5 +52,15 @@ public abstract class AbstractCardContainer extends AbstractContainerMenu {
             return null;
         Level world = playerEntity.getLevel();
         return world.getBlockEntity(sourceContainer.relative(dir));
+    }
+
+    public BlockState getBlockStateFaced(){
+        if (sourceContainer.equals(BlockPos.ZERO))
+            return null;
+        var dir = getDirection();
+        if (dir == null)
+            return null;
+        Level world = playerEntity.getLevel();
+        return world.getBlockState(sourceContainer.relative(dir));
     }
 }
