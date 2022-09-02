@@ -259,15 +259,15 @@ dependencies {
     //runtimeOnly fg.deobf("curse.maven:enderchests-363535:3765400")
 
     //Integrated dynamics
-    implementation fg.deobf("curse.maven:cyclops-core-232758:3900719");
-    implementation fg.deobf("curse.maven:common-capabilities-247007:3768491");
-    implementation fg.deobf("curse.maven:integrated-dynamics-236307:3928077");
-    implementation fg.deobf("curse.maven:integrated-tunnels-251389:3900670");
-    implementation fg.deobf("curse.maven:integrated-crafting-287357:3804733");
-    implementation fg.deobf("curse.maven:integrated-terminals-295910:3824478");
+    implementation fg.deobf("curse.maven:cyclops-core-232758:3929867");
+    implementation fg.deobf("curse.maven:common-capabilities-247007:3929863");
+    implementation fg.deobf("curse.maven:integrated-dynamics-236307:3957305");
+    implementation fg.deobf("curse.maven:integrated-tunnels-251389:3957245");
+    implementation fg.deobf("curse.maven:integrated-crafting-287357:3929880");
+    implementation fg.deobf("curse.maven:integrated-terminals-295910:3929892");
 
     //Integrated NBT
-    implementation fg.deobf("curse.maven:integrated-nbt-380998:3824420");
+    //implementation fg.deobf("curse.maven:integrated-nbt-380998:3824420");
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
