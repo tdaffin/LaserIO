@@ -12,7 +12,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.IntTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraft.world.entity.SlotAccess;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
@@ -43,7 +42,7 @@ public class PowergenItem extends BlockItem {
             var item = itemList.getCompound(0);
             var itemStack = ItemStack.of(item);
             if (itemStack.getCount() > 0){
-                pTooltip.add(new TextComponent("Items: ")
+                pTooltip.add(Component.literal("Items: ")
                     .append("" + itemStack.getCount() + " ")    
                     .append(itemStack.getHoverName())    
                     .withStyle(ChatFormatting.GREEN));
@@ -52,12 +51,12 @@ public class PowergenItem extends BlockItem {
         if (tag.contains(PowergenBE.TagEnergy)) {
             var tEnergy = tag.get(PowergenBE.TagEnergy);
             if (tEnergy instanceof IntTag energy)
-                pTooltip.add(new TextComponent("Energy: " + energy)
+                pTooltip.add(Component.literal("Energy: " + energy)
                     .withStyle(ChatFormatting.YELLOW));
         }
         if (tag.contains(PowergenBE.TagInfo)) {
             var genTicks = tag.getCompound(PowergenBE.TagInfo).getInt(PowergenBE.TagGenTicks);
-            pTooltip.add(new TextComponent("Generating: " + genTicks)
+            pTooltip.add(Component.literal("Generating: " + genTicks)
                     .withStyle(ChatFormatting.YELLOW));
         }
     }

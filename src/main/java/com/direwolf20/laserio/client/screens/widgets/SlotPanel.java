@@ -9,7 +9,6 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -26,7 +25,7 @@ public class SlotPanel extends AbstractWidget {
     public int style = 0;
 
     public SlotPanel(int pX, int pY) {
-        this(pX, pY, TextComponent.EMPTY, NO_TOOLTIP);
+        this(pX, pY, Component.empty(), NO_TOOLTIP);
     }
 
     public SlotPanel(int pX, int pY, Component pMessage) {

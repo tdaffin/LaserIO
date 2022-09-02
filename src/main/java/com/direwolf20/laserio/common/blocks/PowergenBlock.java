@@ -7,7 +7,6 @@ import com.direwolf20.laserio.common.containers.PowergenContainer;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TranslatableComponent;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
@@ -85,7 +84,7 @@ public class PowergenBlock extends Block implements EntityBlock {
                 MenuProvider containerProvider = new MenuProvider() {
                     @Override
                     public Component getDisplayName() {
-                        return new TranslatableComponent(SCREEN_TUTORIAL_POWERGEN);
+                        return Component.translatable(SCREEN_TUTORIAL_POWERGEN);
                     }
 
                     @Override
@@ -93,7 +92,7 @@ public class PowergenBlock extends Block implements EntityBlock {
                         return new PowergenContainer(windowId, pos, playerInventory, playerEntity);
                     }
                 };
-                NetworkHooks.openGui((ServerPlayer) player, containerProvider, be.getBlockPos());
+                NetworkHooks.openScreen((ServerPlayer) player, containerProvider, be.getBlockPos());
             } else {
                 throw new IllegalStateException("Our named container provider is missing!");
             }

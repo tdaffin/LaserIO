@@ -20,8 +20,7 @@ import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.renderer.GameRenderer;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
-import net.minecraft.network.chat.TranslatableComponent;
+import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.util.Mth;
 import net.minecraft.world.entity.player.Inventory;
@@ -83,7 +82,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         //buttons.put(CardTypeButton, new Button(getGuiLeft(), getGuiTop() - HeaderOffset, 80, 20, this.cardTypeName(), (button) -> {}));
         if (baseContainer.direction == -1)
             return;
-        var returnText = new TextComponent("<--");
+        var returnText = Component.literal("<--");
         buttons.put(ReturnButton, new Button(getGuiLeft() - 25, getGuiTop() + 1, 25, 20, returnText, (button) -> {
             openNode();
         }));
@@ -115,7 +114,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
         Button returnButton = buttons.get(ReturnButton);
         if (MiscTools.inBounds(returnButton, mouseX, mouseY)) {
             ArrayList<Component> tooltips = new ArrayList<Component>();
-            tooltips.add(new TranslatableComponent(LaserNode.SCREEN_LASERNODE));
+            tooltips.add(Component.translatable(LaserNode.SCREEN_LASERNODE));
             //tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
             this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
@@ -124,7 +123,7 @@ public abstract class AbstractCardScreen<T extends AbstractCardContainer> extend
             ArrayList<Component> tooltips = new ArrayList<Component>();
             //tooltips.add(LaserNodeScreen.sides[baseContainer.direction]);
             //tooltips.add(sideWidget.getMessage());
-            tooltips.add(new TextComponent(sideName));
+            tooltips.add(Component.literal(sideName));
             this.renderComponentTooltip(pPoseStack, tooltips, mouseX, mouseY);
         }
     }

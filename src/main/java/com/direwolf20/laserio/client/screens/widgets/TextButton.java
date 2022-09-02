@@ -6,7 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 
 import java.awt.*;
@@ -15,12 +15,12 @@ public class TextButton extends Button {
     private String text;
 
     public TextButton(int x, int y, int width, int height, String text, OnPress onPress) {
-        super(x, y, width, height, TextComponent.EMPTY, onPress);
+        super(x, y, width, height, Component.empty(), onPress);
         this.text = text;
     }
 
     public TextButton(int x, int y, int width, int height, String text, OnPress onPress, OnTooltip onTooltip) {
-        super(x, y, width, height, TextComponent.EMPTY, onPress, onTooltip);
+        super(x, y, width, height, Component.empty(), onPress, onTooltip);
         this.text = text;
     }
 

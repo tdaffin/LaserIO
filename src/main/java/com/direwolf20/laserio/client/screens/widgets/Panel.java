@@ -9,7 +9,6 @@ import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.narration.NarratedElementType;
 import net.minecraft.client.gui.narration.NarrationElementOutput;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.chat.TextComponent;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
@@ -26,7 +25,7 @@ public class Panel extends AbstractWidget {
     public int style = 1;
 
     public Panel(int pX, int pY, int pWidth, int pHeight) {
-        this(pX, pY, pWidth, pHeight, TextComponent.EMPTY);
+        this(pX, pY, pWidth, pHeight, Component.empty());
     }
 
     public Panel(int pX, int pY, int pWidth, int pHeight, Component pMessage) {

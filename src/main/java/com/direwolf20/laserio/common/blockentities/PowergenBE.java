@@ -140,11 +140,6 @@ public class PowergenBE extends BlockEntity {
         tag.put(TagInfo, infoTag);
     }
 
-    @Override
-    public CompoundTag getTileData() {
-       return super.getTileData();
-    }
-
     private ItemStackHandler createHandler() {
         return new ItemStackHandler(1) {
 

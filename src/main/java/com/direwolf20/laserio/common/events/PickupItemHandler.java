@@ -5,7 +5,7 @@ import com.direwolf20.laserio.setup.Registration;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.chat.TextComponent;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.event.entity.player.EntityItemPickupEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -20,7 +20,7 @@ public class PickupItemHandler {
         if (emptyTag == null){
             var defaultState = Registration.POWERGEN.get().defaultBlockState();
             var be = Registration.POWERGEN_BE.get().create(new BlockPos(0, 0, 0), defaultState);
-            emptyTag = be.getTileData();
+            emptyTag = be.getPersistentData();
             be.saveAdditional(emptyTag);
         }
         return emptyTag;
@@ -35,10 +35,10 @@ public class PickupItemHandler {
             return;
         
         var tag = itemStack.getTagElement(BlockEntityTag);
-        //event.getPlayer().displayClientMessage(new TextComponent(tag.getAsString()), false);
+        //event.getEntity().displayClientMessage(Component.literal(tag.getAsString()), false);
 
         var empty = getEmpty();
-        //event.getPlayer().displayClientMessage(new TextComponent(empty.getAsString()), false);
+        //event.getEntity().displayClientMessage(Component.literal(empty.getAsString()), false);
 
         boolean isEmpty = true;
         for(var key : empty.getAllKeys()){
@@ -51,7 +51,7 @@ public class PickupItemHandler {
         if (isEmpty){
             for(var key : tag.getAllKeys()){
                 if (!empty.contains(key)){
-                    event.getPlayer().displayClientMessage(new TextComponent("Removing: " + tag.get(key).getAsString()), false);
+                    event.getEntity().displayClientMessage(Component.literal("Removing: " + tag.get(key).getAsString()), false);
                 }
             }
             itemStack.removeTagKey(BlockEntityTag);
