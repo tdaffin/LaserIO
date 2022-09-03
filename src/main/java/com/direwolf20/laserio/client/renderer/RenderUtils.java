@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -33,12 +34,17 @@ import static com.direwolf20.laserio.util.MiscTools.findOffset;
 
 public class RenderUtils {
     private static EnumMap<BaseCard.CardType, Color> cardTypeColors = new EnumMap<BaseCard.CardType, Color>(BaseCard.CardType.class);
+    private static EnumMap<BaseCard.CardType, Component> cardTypeNames = new EnumMap<BaseCard.CardType, Component>(BaseCard.CardType.class);
     
     static {
         cardTypeColors.put(BaseCard.CardType.ITEM, new Color(0f, 1f, 0f));
+        cardTypeNames.put(BaseCard.CardType.ITEM, Component.translatable("item.laserio.card_item"));
         cardTypeColors.put(BaseCard.CardType.FLUID, new Color(0f, 0f, 1f));
+        cardTypeNames.put(BaseCard.CardType.FLUID, Component.translatable("item.laserio.card_fluid"));
         cardTypeColors.put(BaseCard.CardType.ENERGY, new Color(1f, 1f, 0f));
+        cardTypeNames.put(BaseCard.CardType.ENERGY, Component.translatable("item.laserio.card_energy"));
         cardTypeColors.put(BaseCard.CardType.REDSTONE, new Color(1f, 0f, 0f));
+        cardTypeNames.put(BaseCard.CardType.REDSTONE, Component.translatable("item.laserio.card_redstone"));
     }
 
     public static Color getColor(BaseCard.CardType cardType){
@@ -46,6 +52,13 @@ public class RenderUtils {
         if (color == null)
             return Color.BLACK;
         return color;
+    }
+
+    public static Component getName(BaseCard.CardType cardType){
+        Component name = cardTypeNames.get(cardType);
+        if (name == null)
+            return Component.empty();
+        return name;
     }
 
     public static void render(Matrix4f matrix, VertexConsumer builder, BlockPos pos, Color color, float scale) {
