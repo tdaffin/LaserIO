@@ -267,7 +267,7 @@ dependencies {
     implementation fg.deobf("curse.maven:integrated-terminals-295910:3929892");
 
     //Integrated NBT
-    //implementation fg.deobf("curse.maven:integrated-nbt-380998:3824420");
+    implementation fg.deobf("curse.maven:integrated-nbt-380998:3983269");
 
     // For more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
