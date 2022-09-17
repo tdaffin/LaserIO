@@ -261,7 +261,7 @@ dependencies {
     //Integrated dynamics
     implementation fg.deobf("curse.maven:cyclops-core-232758:3929867");
     implementation fg.deobf("curse.maven:common-capabilities-247007:3929863");
-    implementation fg.deobf("curse.maven:integrated-dynamics-236307:3957305");
+    implementation fg.deobf("curse.maven:integrated-dynamics-236307:3993508");
     implementation fg.deobf("curse.maven:integrated-tunnels-251389:3957245");
     implementation fg.deobf("curse.maven:integrated-crafting-287357:3929880");
     implementation fg.deobf("curse.maven:integrated-terminals-295910:3929892");
